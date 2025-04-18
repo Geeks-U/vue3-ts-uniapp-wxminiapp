@@ -1,0 +1,64 @@
+{
+  "compilerOptions": {
+    // 设置 JavaScript 的目标版本（转换成浏览器支持的 ESNext）
+    "target": "esnext",
+
+    // 指定模块系统（通常 Vite/Webpack 用 esnext）
+    "module": "esnext",
+
+    // 模块解析策略，node 模式能识别 node_modules
+    "moduleResolution": "node",
+
+    // 启用所有严格类型检查选项
+    "strict": true,
+
+    // 保留 JSX，交由 vue/compiler 处理
+    "jsx": "preserve",
+
+    // 启用 tslib 以减少打包体积（如果你用了 tslib）
+    "importHelpers": true,
+
+    // 允许通过 `import fs from 'fs'` 形式导入 CommonJS 模块
+    "esModuleInterop": true,
+
+    // 允许默认导入非 ES 模块（比如 `import moment from 'moment'`）
+    "allowSyntheticDefaultImports": true,
+
+    // 允许导入 JSON 文件
+    "resolveJsonModule": true,
+
+    // 每个文件作为独立模块编译，配合 Vite/webpack 使用
+    "isolatedModules": true,
+
+    // 生成 .map 文件，方便调试
+    "sourceMap": true,
+
+    // 跳过库文件类型检查（可加快编译）
+    "skipLibCheck": true,
+
+    // 设置项目根路径（配合 paths 使用）
+    "baseUrl": ".",
+
+    // 配置别名，比如 import x from '@/utils'
+    "paths": {
+      "@/*": ["src/*"]
+    },
+
+    // 编译时使用的标准库（DOM + ESNext 语法支持）
+    "lib": ["esnext", "dom"],
+
+    // 引入全局类型定义，例如 uni-app 的类型定义
+    "types": ["@dcloudio/types"],
+
+    // 替代已废弃的 preserveValueImports 和 importsNotUsedAsValues
+    "verbatimModuleSyntax": true
+  },
+
+  // 编译包含的文件类型和路径
+  "include": [
+    "src/**/*.ts",      // 所有 TypeScript 文件
+    "src/**/*.d.ts",    // 所有声明文件
+    "src/**/*.tsx",     // 带 JSX 的 TS 文件
+    "src/**/*.vue"      // Vue 单文件组件
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  // 启用 ESLint 插件
+  "eslint.enable": true,
+
+  // 显示 ESLint 问题提示
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue"
+  ],
+
+  // ESLint 启用范围设置（可选，仅对 src/ 生效）
+  "eslint.workingDirectories": [
+    { "mode": "auto" },
+    { "directory": "./src" }
+  ],
+
+  // 禁用保存时自动格式化，会与用户配置的插件自动格式化相冲突所以禁用
+  "editor.formatOnSave": false,
+
+  // 保存时启用所有插件的修复操作
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  }
+}
