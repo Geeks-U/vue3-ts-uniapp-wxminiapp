@@ -3,19 +3,17 @@ import { useUserStore } from '@/stores/index'
 
 const userStore = useUserStore();
 
-import '@/utils/http'
+import {  http } from '@/utils/http'
 
 const getData = () => {
-  uni.request({
+  http<any[]>({
     method: 'GET',
     url: '/home/banner',
-    success: (res) => {
-      console.log('Data fetched successfully:', res.data)
-    },
-    fail: (err) => {
-      console.error('Failed to fetch data:', err)
-    }
-  })
+  }).then((res) => {
+    console.log('Data fetched successfully:', res);
+  }).catch((error) => {
+    console.error('Error fetching data:', error);
+  });
 }
 </script>
 

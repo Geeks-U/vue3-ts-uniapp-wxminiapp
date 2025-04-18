@@ -24,10 +24,17 @@ export const useUserStore = defineStore('user',
       userInfo.value.token = ''
     }
 
+    function remove() {
+      userInfo.value.name = ''
+      userInfo.value.isLoggedIn = false
+      userInfo.value.token = ''
+    }
+
     return {
       userInfo,
       login,
       logout,
+      remove
     }
   },
   {
