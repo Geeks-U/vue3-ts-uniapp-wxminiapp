@@ -11,17 +11,21 @@
     @scrolltolower="handleScrollToLower"
     :lower-threshold="20"
   >
-    <!-- 轮播图 -->
-    <Swiper :pictures="bannerList" />
+    <!-- 页面骨架屏 -->
+    <PageSkeleton v-if="skeletonLoading" />
+    <template v-else>
+      <!-- 轮播图 -->
+      <Swiper :pictures="bannerList" />
 
-    <!-- 分类面板 -->
-    <CategoryPanel :categoryList="categoryList" />
+      <!-- 分类面板 -->
+      <CategoryPanel :categoryList="categoryList" />
 
-    <!-- 热门 -->
-    <HotPanel :hotPanelList="hotPanelList" />
+      <!-- 热门 -->
+      <HotPanel :hotPanelList="hotPanelList" />
 
-    <!-- 猜你喜欢 -->
-    <guessLike :guessLikeList="guessLikeList" />
+      <!-- 猜你喜欢 -->
+      <guessLike :guessLikeList="guessLikeList" />
+    </template>
   </scroll-view>
 
   <!-- 加载提示 -->
@@ -34,6 +38,7 @@ import { ref } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 
 // 组件引入
+import PageSkeleton from './components/PageSkeleton.vue'
 import CustomNavbar from './components/CustomNavbar.vue'
 import Swiper from '@/components/Swiper.vue'
 import CategoryPanel from './components/CategoryPanel.vue'
@@ -129,7 +134,8 @@ const fetchGuessLikeList = async () => {
   }
 }
 
-// 页面加载时获取数据
+// 页面加载时获取数据 骨架屏显示
+const skeletonLoading = ref(true)
 onLoad(async () => {
   await Promise.all([
     fetchBannerList(),
@@ -137,6 +143,7 @@ onLoad(async () => {
     fetchHotPanelList(),
     fetchGuessLikeList()
   ])
+  skeletonLoading.value = false
 })
 
 // 到底部触发
@@ -198,8 +205,8 @@ const loadMoreGuessLike = async () => {
 
 /* 滚动区域内容 */
 .scroll-content {
-  margin-top: 89rpx; /* 与导航栏高度一致，按需调整 */
-  height: calc(100vh - 89rpx - 10rpx); /* 调整内容高度，避免被底部导航遮挡 */
+  margin-top: 174rpx; /* 与导航栏高度一致，按需调整 */
+  height: calc(100vh - 174rpx); /* 调整内容高度，避免被底部导航遮挡 */
   padding-bottom: 80rpx; /* 为底部加载提示腾出空间 */
 }
 
