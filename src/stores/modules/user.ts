@@ -5,23 +5,27 @@ import { ref } from 'vue'
 export const useUserStore = defineStore('user',
   () => {
     // state
-    const name = ref('')
-    const isLoggedIn = ref(false)
+    const userInfo = ref({
+      name: '',
+      isLoggedIn: false,
+      token: ''
+    })
 
     // actions
-    function login(userName: string) {
-      name.value = userName
-      isLoggedIn.value = true
+    function login(userName: string, token: string) {
+      userInfo.value.name = userName
+      userInfo.value.isLoggedIn = true
+      userInfo.value.token = token
     }
 
     function logout() {
-      name.value = 'user'
-      isLoggedIn.value = false
+      userInfo.value.name = 'user'
+      userInfo.value.isLoggedIn = false
+      userInfo.value.token = ''
     }
 
     return {
-      name,
-      isLoggedIn,
+      userInfo,
       login,
       logout,
     }
