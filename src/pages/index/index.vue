@@ -1,4 +1,7 @@
 <template>
+  <uni-card title="卡卡西" sub-title="导师" extra="木叶村" thumbnail="https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/unicloudlogo.png">
+	  <text>木叶忍者</text>
+  </uni-card>
   <view class="content">
     <image class="logo" src="/static/logo.png" />
     <view class="text-area">

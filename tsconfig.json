@@ -48,10 +48,16 @@
     "lib": ["esnext", "dom"],
 
     // 引入全局类型定义，例如 uni-app 的类型定义
-    "types": ["@dcloudio/types"],
+    "types": [
+              "vue",
+              "@dcloudio/types",
+              "@uni-helper/uni-app-types",
+              "@uni-helper/uni-ui-types",
+              "@types/wechat-miniprogram"
+            ],
 
     // 替代已废弃的 preserveValueImports 和 importsNotUsedAsValues
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": true,
   },
 
   // 编译包含的文件类型和路径
