@@ -51,7 +51,7 @@
     <view class="order-container">
       <view class="top-row">
         <text class="order-title">我的订单</text>
-        <view class="right-container">
+        <view @tap="goToOrderPage" class="right-container">
           <text class="order-view-all">查看全部订单</text>
           <uni-icons type="right" size="17" />
         </view>
@@ -196,8 +196,15 @@ const loadMoreGuessLike = async () => {
   }
 }
 
+// 事件函数
 const handleScrollToLower = () => {
   loadMoreGuessLike()
+}
+
+const goToOrderPage = () => {
+  uni.navigateTo({
+    url: '/pages/order/index'
+  })
 }
 </script>
 
