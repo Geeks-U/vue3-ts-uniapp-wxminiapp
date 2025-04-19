@@ -14,7 +14,7 @@ const httpInterceptor = {
     config.header = {
       ...config.header,
       'source-client': 'miniapp',
-      Authorization: userStore.userInfo?.token || ''
+      Authorization: userStore.userInfoCPLogin?.token || ''
     }
   }
 }

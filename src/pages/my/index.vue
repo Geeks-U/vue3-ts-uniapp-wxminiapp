@@ -9,7 +9,7 @@
   >
     <!-- 用户信息 -->
      <!-- 未登录 -->
-    <view v-if="true" class="custom-list" :style="navBarStyle">
+    <view v-if="!userStore.userInfoCPLogin.isLogin" class="custom-list" :style="navBarStyle">
       <view class="row-container">
         <view class="avatar-wrapper">
           <image
@@ -18,11 +18,11 @@
             mode="scaleToFill"
           />
         </view>
-        <view class="body-text">
+        <view @tap="goToLoginPage" class="body-text">
           <p class="body-title">未登录</p>
           <p class="body-subtitle">点击登录账号</p>
         </view>
-        <view class="footer-text">
+        <view @tap="goToSettingsPage" class="footer-text">
           <text class="footer-label">设置</text>
         </view>
       </view>
@@ -33,15 +33,15 @@
         <view class="avatar-wrapper">
           <image
             class="avatar"
-            src="https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/unicloudlogo.png"
+            :src="userStore.userInfoCPLogin.avatar"
             mode="scaleToFill"
           />
         </view>
         <view class="body-text">
-          <p class="body-title">昵称</p>
+          <p class="body-title">{{ userStore.userInfoCPLogin.nickname }}</p>
           <p class="body-subtitle">更新个人信息</p>
         </view>
-        <view class="footer-text">
+        <view @tap="goToSettingsPage" class="footer-text">
           <text class="footer-label">设置</text>
         </view>
       </view>
@@ -74,7 +74,7 @@
           <uni-icons type="chatboxes" size="24" />
           <p>待评价</p>
         </view>
-        <view class="body-item">
+        <view @tap="goToCustomerServicePage" class="body-item">
           <uni-icons type="headphones" size="24" />
           <p>售后</p>
         </view>
@@ -98,6 +98,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
+import { useUserStore } from '@/stores'
 
 // 组件引入
 import guessLike from './components/guessLike.vue'
@@ -107,6 +108,7 @@ import PageSkeleton from './components/PageSkeleton.vue'
 import { getHomeGuessLikeData } from '@/services/home'
 
 // 数据
+let userStore
 const { safeAreaInsets, statusBarHeight } = uni.getSystemInfoSync()
 const safeTop = statusBarHeight || safeAreaInsets?.top || 20
 const navBarStyle = {
@@ -156,6 +158,8 @@ onLoad(async () => {
   await Promise.all([
   fetchGuessLikeList()
   ])
+  // 等待pinia初始化完成
+  userStore = useUserStore()
   skeletonLoading.value = false
 })
 
@@ -201,9 +205,27 @@ const handleScrollToLower = () => {
   loadMoreGuessLike()
 }
 
+const goToLoginPage = () => {
+  uni.navigateTo({
+    url: '/pages/login/index'
+  })
+}
+
 const goToOrderPage = () => {
   uni.navigateTo({
     url: '/pages/order/index'
+  })
+}
+
+const goToCustomerServicePage = () => {
+  uni.navigateTo({
+    url: '/pages/customerService/index'
+  })
+}
+
+const goToSettingsPage = () => {
+  uni.navigateTo({
+    url: '/pages/settings/index'
   })
 }
 </script>
